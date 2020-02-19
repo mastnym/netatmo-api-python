@@ -2,7 +2,7 @@ import logging
 import time
 
 from pyatmo.exceptions import NoDevice
-from pyatmo.helpers import BASE_URL, fixId, today_stamps
+from pyatmo.helpers import BASE_URL, fix_id, today_stamps
 
 LOG = logging.getLogger(__name__)
 
@@ -26,7 +26,7 @@ class WeatherStationData:
         if resp is None or "body" not in resp:
             raise NoDevice("No weather station data returned by Netatmo server")
         try:
-            self.raw_data = fixId(resp["body"].get("devices"))
+            self.raw_data = fix_id(resp["body"].get("devices"))
         except KeyError:
             LOG.debug("No <body> in response %s", resp)
             raise NoDevice("No weather station data returned by Netatmo server")
